@@ -2,29 +2,32 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from dotenv import load_dotenv
 
-# Supabase PostgreSQL connection
-DATABASE_URL = (
-    "postgresql+psycopg2://postgres:Fasthub@2025!@db.hsedfoiodcrxgsnzmlnb.supabase.co:5432/postgres"
-)
+load_dotenv()
+
+# Database configuration - Force SQLite for this project
+DATABASE_URL = "sqlite:///./ecommerce.db"
 
 # Create SQLAlchemy engine
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+engine = create_engine(
+    DATABASE_URL, 
+    connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {}
+)
 
-# Session maker
+# Create session maker
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Declarative base
+# Create declarative base for models
 Base = declarative_base()
 
-# Dependency for DB session
+# Dependency to get database session
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
-
 
 # Application settings
 class Settings:

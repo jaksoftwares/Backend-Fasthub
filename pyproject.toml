@@ -16,5 +16,5 @@ dependencies = [
     "uvicorn[standard]>=0.37.0",
 
     # ✅ Add this for Supabase/Postgres
-    "psycopg2-binary>=2.9.9"
-]
+    "psycopg2-binary>=2.9.10"
+    ]
