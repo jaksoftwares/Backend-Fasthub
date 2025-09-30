@@ -14,7 +14,6 @@ dependencies = [
     "requests>=2.32.5",
     "sqlalchemy>=2.0.43",
     "uvicorn[standard]>=0.37.0",
-
-    # ✅ Add this for Supabase/Postgres
-    "psycopg2-binary>=2.9.10"
+    "psycopg2-binary>=2.9.10",
+    "cloudinary>=2.8.0"
     ]
